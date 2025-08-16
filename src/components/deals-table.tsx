@@ -1052,7 +1052,7 @@ export function DealsTable() {
   }, []);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2 sm:space-y-4">
       <AccessibilityAnnouncer message={announcementMessage} />
 
       <KeyboardNavigation
@@ -1064,7 +1064,7 @@ export function DealsTable() {
         isNavigating={isNavigating}
       />
 
-      <div className="flex items-center justify-between">
+      <div className="mt-2 sm:mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
         <h1 className="text-2xl font-bold">Deals</h1>
         <ColumnManager
           columns={columnConfig}
@@ -1104,41 +1104,27 @@ export function DealsTable() {
         />
       )}
 
-      <div
-        className="rounded-md border"
-        style={{
-          minHeight: "400px", // Adjust based on your needs
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div className="overflow-x-auto">
-          <table
-            className="w-full"
-            style={{
-              minWidth: totalTableWidth,
-              visibility: isMounted ? "visible" : "hidden",
-              tableLayout: "fixed"
-            }}
-          >
+      <div className="rounded-md border overflow-x-auto">
+        <div className="mt-2 sm:mt-4 overflow-x-auto">
+          <table className="w-full min-w-[800px] sm:min-w-0">
             <colgroup>
-              {visibleColumns.map(col => (
-                <col 
+              {visibleColumns.map((col) => (
+                <col
                   key={col.id}
                   style={{
-                    width: columnWidths[col.id] || col.width || '150px',
-                    minWidth: columnWidths[col.id] || col.width || '150px',
-                    maxWidth: columnWidths[col.id] || col.width || '150px'
+                    width: columnWidths[col.id] || col.width || "150px",
+                    minWidth: columnWidths[col.id] || col.width || "150px",
+                    maxWidth: columnWidths[col.id] || col.width || "150px",
                   }}
                 />
               ))}
-              {dynamicColumns.map(col => (
-                <col 
+              {dynamicColumns.map((col) => (
+                <col
                   key={col.id}
                   style={{
                     width: col.width,
                     minWidth: col.width,
-                    maxWidth: col.width
+                    maxWidth: col.width,
                   }}
                 />
               ))}

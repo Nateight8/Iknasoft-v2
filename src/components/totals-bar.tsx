@@ -90,11 +90,11 @@ export function TotalsBar({ data, selectedData, className }: TotalsBarProps) {
   }
 
   return (
-    <div className={`sticky bottom-0 bg-background border-t border-border p-4 ${className}`}>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-6">
+    <div className={`sticky bottom-0 bg-background/95 backdrop-blur-sm border-t border-border p-2 sm:p-4 ${className}`}>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
+        <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:gap-4 sm:flex-wrap">
           {/* Total Value */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             <DollarSign className="h-4 w-4 text-muted-foreground" />
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground">Total Value</span>
@@ -102,10 +102,10 @@ export function TotalsBar({ data, selectedData, className }: TotalsBarProps) {
             </div>
           </div>
 
-          <Separator orientation="vertical" className="h-8" />
+          <Separator orientation="vertical" className="h-8 hidden sm:block" />
 
           {/* Forecast Value */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             <TrendingUp className="h-4 w-4 text-green-600" />
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground">Forecast</span>
@@ -113,10 +113,10 @@ export function TotalsBar({ data, selectedData, className }: TotalsBarProps) {
             </div>
           </div>
 
-          <Separator orientation="vertical" className="h-8" />
+          <Separator orientation="vertical" className="h-8 hidden sm:block" />
 
           {/* Deal Count */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             <Target className="h-4 w-4 text-muted-foreground" />
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground">Deals</span>
@@ -124,30 +124,30 @@ export function TotalsBar({ data, selectedData, className }: TotalsBarProps) {
             </div>
           </div>
 
-          <Separator orientation="vertical" className="h-8" />
+          <Separator orientation="vertical" className="h-8 hidden sm:block" />
 
           {/* Average Deal Value */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground">Avg Deal</span>
               <span className="font-semibold text-sm">{formatCurrency(totals.avgDealValue)}</span>
             </div>
           </div>
 
-          <Separator orientation="vertical" className="h-8" />
+          <Separator orientation="vertical" className="h-8 hidden sm:block" />
 
           {/* Conversion Rate */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground">Win Rate</span>
               <span className="font-semibold text-sm">{formatPercentage(totals.conversionRate)}</span>
             </div>
           </div>
 
-          <Separator orientation="vertical" className="h-8" />
+          <Separator orientation="vertical" className="h-8 hidden sm:block" />
 
           {/* Closing Soon */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             <Calendar className="h-4 w-4 text-orange-500" />
             <div className="flex flex-col">
               <span className="text-xs text-muted-foreground">Closing Soon</span>
@@ -157,19 +157,21 @@ export function TotalsBar({ data, selectedData, className }: TotalsBarProps) {
         </div>
 
         {/* Stage Breakdown */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-muted-foreground mr-2">Stages:</span>
-          {Object.entries(totals.stageBreakdown).map(([stage, count]) => (
-            <Badge key={stage} variant="secondary" className="text-xs">
-              {stage}: {count}
-            </Badge>
-          ))}
+        <div className="flex flex-wrap items-center gap-1 sm:gap-2 pt-2 sm:pt-0 border-t border-border sm:border-0 mt-2 sm:mt-0">
+          <span className="text-xs text-muted-foreground mr-1 sm:mr-2">Stages:</span>
+          <div className="flex flex-wrap gap-1 sm:gap-2">
+            {Object.entries(totals.stageBreakdown).map(([stage, count]) => (
+              <Badge key={stage} variant="secondary" className="text-[10px] sm:text-xs">
+                {stage}: {count}
+              </Badge>
+            ))}
+          </div>
         </div>
       </div>
 
       {selectedData && selectedData.length > 0 && (
         <div className="mt-2 pt-2 border-t border-border">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-4">
             <Users className="h-3 w-3 text-blue-500" />
             <span className="text-xs text-blue-500 font-medium">
               Showing totals for {selectedData.length} selected row{selectedData.length !== 1 ? "s" : ""}
